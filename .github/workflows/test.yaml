@@ -1,0 +1,15 @@
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+    test:
+        runs-on: ubuntu-20.04
+        steps:
+            - uses : actions/checkout@v3
+            - uses: ./
+              with:
+                hub-username: ${{ secrets.DHUB_UNAME }}
+                hub-password:   ${{ secrets.DHUB_PASSWORD }}
+                github-token: ${{ secrets.PAT }}
+              id: valiation

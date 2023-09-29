@@ -1,16 +1,19 @@
 name: inspect-tag-in-hub
 description: An action to scan a helm repo for docker tags and check if they exist in a hub
 inputs:
-  hub_username:
+  hub-username:
     description: The username to use for the hub
-  hub_password:
+    required: true
+  hub-password:
     description: The password to use for the hub
-  path_to_helm_repo:
+    required: true
+  target-path:
     description: The path to the helm repo to scan
     default: .
+  github-token:
+    description: The token to use for github
+    required: true
 runs:
-  using: composite
-  steps:
-    - run: |
-        npx zx@7.0.7 check_image_tag.mjs  ${{inputs.path_to_helm_repo}} ${{inputs.hub_username}} ${{inputs.hub_password}}
-      shell: bash
+  using: node20
+  main: check_image_tag.js
+  post: comment.js
