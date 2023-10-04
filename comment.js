@@ -59,17 +59,10 @@ async function run() {
     // let's add a comment to the exracted PR with the results of the check.
     const octokit = github.getOctokit(githubToken);
 
-    if (failed.length === 0) {
-        const _ = await octokit.rest.issues.createComment({
-            owner,
-            repo,
-            issue_number,
-            body: "No failed images found!",
-        });
-        process.exit(0);
+    let comment = "All tags are listed in Dockerhub!";
+    if (failed.length > 0) {
+        comment = formatComment(failed);
     }
-    
-    const comment = formatComment(failed);
 
     const issue_number = pull_request.number;
     const _ = await octokit.rest.issues.createComment({
@@ -78,7 +71,6 @@ async function run() {
         issue_number,
         body: comment,
     });
-
 
 }
 
