@@ -9,12 +9,10 @@ function getInputs() {
     const targetPath = core.getInput("target-path");
     const hubUsername = core.getInput("hub-username");
     const hubPassword = core.getInput("hub-password");
-    const githubToken = core.getInput("github-token");
     return {
         targetPath,
         hubUsername,
         hubPassword,
-        githubToken,
     }; 
 }
 
@@ -152,7 +150,6 @@ async function main(){
         targetPath,
         hubUsername,
         hubPassword,
-        githubToken
     } = getInputs();
 
     const imageInfoList = [...new Set(scanDirectory(targetPath).filter(element => element !== null))];
@@ -165,6 +162,8 @@ async function main(){
         if (failed.length > 0) {
             console.log(failed)
             core.saveState("failed", JSON.stringify(failed));
+            // sets the action to failed if there are any failed requests
+            core.setFailed("Some images/tags are not available on dockerhub.");
         }
 
     } else {

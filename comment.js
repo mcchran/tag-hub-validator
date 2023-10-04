@@ -23,7 +23,6 @@ function formatComment(failed) {
     let comment = `The following image-tags are not available on dockerhub: \n\n`;
     let maxRepoTagLength = 0;
     let maxReasonLength = 0;
-
     // Iterate through the failed to find the maximum lengths
     failed.forEach(item => {
     if (item.repoTag.length > maxRepoTagLength) {
