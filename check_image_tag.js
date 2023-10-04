@@ -158,10 +158,9 @@ async function main(){
         // get dockerhub token to check if the image/tag exists
         const token = await getDockerJwt(hubUsername, hubPassword);
         const [_, failed] = await performDockerHubRequests(token, imageInfoList)
-
+        core.saveState("failed", JSON.stringify(failed));
         if (failed.length > 0) {
             console.log(failed)
-            core.saveState("failed", JSON.stringify(failed));
             // sets the action to failed if there are any failed requests
             core.setFailed("Some images/tags are not available on dockerhub.");
         }
