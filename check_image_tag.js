@@ -74,7 +74,7 @@ function parseImageReference(imageReference) {
             }
 
             if (!tag) {
-                tag = imageReference.tag || 'latest';
+                tag = imageReference.version || imageReference.tag || 'latest';
             }
 
             return `${repositoryName}:${tag}`;
