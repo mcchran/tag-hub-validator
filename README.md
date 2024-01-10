@@ -47,6 +47,7 @@ jobs:
           hub-username: ${{ secrets.DOCKER_HUB_USERNAME }}
           hub-password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          should-comment: "false"
 ```
 
 Make sure to set the required secrets (DOCKER_HUB_USERNAME, DOCKER_HUB_PASSWORD, and GITHUB_TOKEN) in your GitHub repository secrets for secure authentication.

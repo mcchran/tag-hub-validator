@@ -3,8 +3,10 @@ const core = require("@actions/core");
 
 function getInputs() {
     const githubToken = core.getInput("github-token");
+    const shouldComment = core.getInput("should-comment") === "true";
     return {
         githubToken,
+        shouldComment,
     };
 }
 function getState() { 
@@ -50,8 +52,12 @@ async function run() {
 
     const {
         githubToken,
+        shouldComment
     } = getInputs();
     
+    if (!shouldComment) {
+        return;
+    }
 
     const { pull_request } = github.context.payload;
     const { owner, repo } = github.context.repo;
