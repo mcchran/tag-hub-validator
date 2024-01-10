@@ -12,4 +12,5 @@ jobs:
                 hub-username: ${{ secrets.DHUB_UNAME }}
                 hub-password:   ${{ secrets.DHUB_PASSWORD }}
                 github-token: ${{ secrets.PAT }}
+                should-comment: true
               id: validation

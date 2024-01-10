@@ -13,6 +13,10 @@ inputs:
   github-token:
     description: The token to use for github
     required: true
+  should-comment:
+    description: Whether or not to comment on the PR
+    default: "true"
+    required: false
 runs:
   using: node20
   main: check_image_tag.js
